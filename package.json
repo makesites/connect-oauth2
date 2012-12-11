@@ -1,12 +1,12 @@
 {
-  "name": "connect-oauth",
+  "name": "connect-oauth2",
   "version": "0.0.1",
-  "description": "[WIP] Lightweight OAuth provider with minimal dependencies, as a connect middleware",
+  "description": "[WIP] Lightweight OAuth v2 provider with minimal dependencies, as a connect middleware",
   "author": "makesites",
   "contributors": [
     { "name": "Makis Tracend", "email": "makis@makesit.es" }
   ],
-  "homepage": "http://www.makesites.org/connect-oauth", 
+  "homepage": "http://www.makesites.org/connect-oauth2", 
   "keywords": ["node", "oauth", "api"], 
   "main": "./index.js",
   "engines": {
@@ -14,10 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/makesites/connect-oauth"
+    "url": "https://github.com/makesites/connect-oauth2"
   },
   "bugs": {
-    "url": "https://github.com/makesites/connect-oauth/issues"
+    "url": "https://github.com/makesites/connect-oauth2/issues"
   }, 
   "licenses": [
     {
