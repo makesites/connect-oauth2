@@ -1,0 +1,34 @@
+{
+  "name": "connect-oauth",
+  "version": "0.0.1",
+  "description": "[WIP] Lightweight OAuth provider with minimal dependencies, as a connect middleware",
+  "author": "makesites",
+  "contributors": [
+    { "name": "Makis Tracend", "email": "makis@makesit.es" }
+  ],
+  "homepage": "http://www.makesites.org/connect-oauth", 
+  "keywords": ["node", "oauth", "api"], 
+  "main": "./index.js",
+  "engines": {
+    "node": ">0.6.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makesites/connect-oauth"
+  },
+  "bugs": {
+    "url": "https://github.com/makesites/connect-oauth/issues"
+  }, 
+  "licenses": [
+    {
+      "type": "The MIT License",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ], 
+  "dependencies": {
+	  "nconf": ">0.6.x",
+	  "crypto" : "*"
+  }, 
+  "devDependencies": {
+  }
+}
