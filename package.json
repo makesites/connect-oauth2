@@ -1,6 +1,6 @@
 {
   "name": "connect-oauth2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "[WIP] Lightweight OAuth v2 provider with minimal dependencies, as a connect middleware",
   "author": "makesites",
   "contributors": [
@@ -26,8 +26,7 @@
     }
   ], 
   "dependencies": {
-	  "nconf": ">0.6.x",
-	  "crypto" : "*"
+          "bcrypt" : "0.7.x"
   }, 
   "devDependencies": {
   }
