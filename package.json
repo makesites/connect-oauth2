@@ -1,33 +1,35 @@
 {
-  "name": "connect-oauth2",
-  "version": "0.0.2",
-  "description": "[WIP] Lightweight OAuth v2 provider with minimal dependencies, as a connect middleware",
-  "author": "makesites",
-  "contributors": [
-    { "name": "Makis Tracend", "email": "makis@makesit.es" }
-  ],
-  "homepage": "http://www.makesites.org/connect-oauth2", 
-  "keywords": ["node", "oauth", "api"], 
-  "main": "./index.js",
-  "engines": {
-    "node": ">0.6.x"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/makesites/connect-oauth2"
-  },
-  "bugs": {
-    "url": "https://github.com/makesites/connect-oauth2/issues"
-  }, 
-  "licenses": [
-    {
-      "type": "The MIT License",
-      "url": "http://opensource.org/licenses/MIT"
-    }
-  ], 
-  "dependencies": {
-          "bcrypt" : "0.7.x"
-  }, 
-  "devDependencies": {
-  }
+	"name": "connect-oauth2",
+	"version": "0.0.2",
+	"description": "Connect middleware implementing an OAuth2 provider",
+	"author": "makesites",
+	"contributors": [
+		{ "name": "Makis Tracend", "email": "makis@makesit.es" }
+	],
+	"homepage": "http://www.makesites.org/connect-oauth2",
+	"keywords": ["node", "oauth", "api"],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/makesites/connect-oauth2"
+	},
+	"bugs": {
+		"url": "https://github.com/makesites/connect-oauth2/issues"
+	},
+	"licenses": [
+		{
+			"type": "The MIT License",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	],
+	"main": "./index.js",
+	"engines": {
+		"node": ">=0.8.x"
+	},
+	"dependencies": {
+		"async": "0.9.0",
+		"connect": "~3.0.x",
+		"underscore": "1.6.0"
+	},
+	"devDependencies": {
+	}
 }
