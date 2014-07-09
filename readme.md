@@ -1,7 +1,12 @@
 
 ## Connect OAuth2
 
-Lightweight OAuth2 provider with minimal dependencies, as a connect middleware
+Lightweight OAuth2 provider with minimal dependencies, as a connect middleware.
+
+Major goal for the lib is to create a clean and straightforward implementation of the [latest official spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-31).
+
+For storing the tokens the lib can use a Memory or Redis store, or any other store if supplied a proper inteface model.
+
 
 ## Install
 
@@ -9,21 +14,83 @@ Lightweight OAuth2 provider with minimal dependencies, as a connect middleware
 npm install connect-oauth2
 ```
 
-## Usage 
+## Usage
 
-The lib is meant to be used as a middleware of an existing server
+The lib is meant to be used with a Connect or Express ```app```. It can be loaded either as a middleware or triggered manually on selected routes.
 
 ```
-var oauth2 = require("connect-oauth2"), 
-	connect = require('connect'), 
-	http = require('http'), 
-	MemoryStore = connect.session.MemoryStore;
+var oauth2 = require("connect-oauth2"),
+	connect = require('connect'),
+	http = require('http');
 
 var app = connect()
-  .use( oauth2({ store: new MemoryStore({ reapInterval: 60000 * 10 }) }) )
-  .use(function(req, res){
-    res.end('Hello from Connect!\n');
-  });
+	.use(
+		oauth2({
+			authority: authority,
+			model: "memory"
+		})
+	)
+	.use(function(req, res){
+		res.end('Hello from Connect!\n');
+	});
 
 http.createServer(app).listen(3000);
 ```
+
+Look into the [examples](./examples) folder for more sample code.
+
+### Routes
+
+OAuth2 operates either with separate endpoint URLs, or the ```grant_type``` parameter in the query to specify different actions.
+
+
+Comparing grant types to most common URLs:
+
+* client_credentials => /request_token
+* authorization_code => /access_token
+* refresh_token => refresh_token
+* password => /authorize
+
+In additon some endpoints have no grant types:
+
+* /authorize ( response_type == "code" )
+
+
+The option ```routes``` is enabled by default as a security measure, so the lib will skip processing credentials unless pinged from certain endpoints.
+
+
+### Authority
+
+Part of the main options of the lib is passing a custom method under the ```authority``` key. This method will be triggered every time credentials need to be verified. It is assumed that it will be part of your _app_ and connected to the necessary modules that will make this verification possible.
+
+An example of the basic scaffolding follows:
+```
+function( data, callback ){
+
+	for(var key in data){
+		// key can be: client_id, client_secret, username, password
+		// validate data here...
+		// if not correct:
+		return callback(false);
+	}
+	return callback(true);
+}
+```
+
+
+## Options
+
+
+* **authority** (function, default: null), a method that tests the credentials provided and returns a boolean (true/false)
+* **routes** (boolean, default: true), limits execution of the OAuth directives to specific routes
+
+...
+
+
+## Credits
+
+Initiated by Makis Tracend ( [@tracend](http://github.com/tracend) )
+
+Distributed through [Makesites](http://makesites.org)
+
+Released under the [MIT license](http://makesites.org/licenses/MIT)
