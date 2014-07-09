@@ -75,7 +75,7 @@ function authority( data, callback ){
 		// key can be: client_id, client_secret, username, password
 		// validate data here...
 	}
-	return callback(null, true);
+	return callback(true);
 
 }
 
