@@ -3,7 +3,7 @@
 
 Lightweight OAuth2 provider with minimal dependencies, as a connect middleware.
 
-Major goal for the lib is to create a clean and straightforward implementation of the [latest official spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-31).
+Major goal for the lib is to create a clean and straightforward implementation of the [latest official spec](http://tools.ietf.org/html/rfc6749).
 
 For storing the tokens the lib can use a Memory or Redis store, or any other store if supplied a proper inteface model.
 
@@ -93,4 +93,4 @@ Initiated by Makis Tracend ( [@tracend](http://github.com/tracend) )
 
 Distributed through [Makesites](http://makesites.org)
 
-Released under the [MIT license](http://makesites.org/licenses/MIT)
+Released under the [Apache license, version 2.0](http://makesites.org/licenses/APACHE-2.0)

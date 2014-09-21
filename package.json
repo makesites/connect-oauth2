@@ -17,8 +17,8 @@
 	},
 	"licenses": [
 		{
-			"type": "The MIT License",
-			"url": "http://opensource.org/licenses/MIT"
+			"type": "Apache license, version 2.0",
+			"url": "http://makesites.org/licenses/APACHE-2.0"
 		}
 	],
 	"main": "./index.js",
