@@ -29,10 +29,7 @@ var app = connect()
 			authority: authority,
 			model: "memory"
 		})
-	)
-	.use(function(req, res){
-		res.end('Hello from Connect!\n');
-	});
+	);
 
 http.createServer(app).listen(3000);
 ```
