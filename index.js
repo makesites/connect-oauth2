@@ -1,2 +1,2 @@
 
-module.exports = require('./lib/oauth');
+module.exports = require('./lib/main');
