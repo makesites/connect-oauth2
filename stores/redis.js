@@ -1,13 +1,13 @@
 /**
  * OAuth2 - Redis Store
- * - Saving tokens/codes using a redis store
+ * - Saving tokens/codes using a redis db
 **/
 
 
 var CRUD = function( options ){
 
-	// use the provided store (error control?)
-	this.store = options.store;
+	// use the provided db (error control?)
+	this.db = options.db;
 
 }
 
@@ -27,8 +27,8 @@ CRUD.prototype = {
 		var ttl = Math.floor( expires / 1000 );
 		// stringify data
 		data = JSON.stringify(data);
-		// connect to store
-		this.store.setex( key, ttl, data, function(err, result){
+		// connect to db
+		this.db.setex( key, ttl, data, function(err, result){
 			if(err) return callback(err);
 			// error control?
 			return callback( null, true );
@@ -38,8 +38,8 @@ CRUD.prototype = {
 	read: function( query, callback ){
 		var key = query.access_token || query.code || false;
 		if( !key ) return callback(null, false);
-		// connect to store
-		this.store.get( key, function(err, data){
+		// connect to db
+		this.db.get( key, function(err, data){
 			if(err) return callback(err);
 			// parse data into an object
 			data = JSON.parse( data.toString() );
@@ -50,8 +50,8 @@ CRUD.prototype = {
 	destroy: function( item, callback ){
 		var key = query.access_token || query.code || false;
 		if( !key ) return callback(null, false);
-		// connect to store
-		this.store.del( key, function(err, data){
+		// connect to db
+		this.db.del( key, function(err, data){
 			if(err) return callback(err);
 			callback( null, true );
 		});

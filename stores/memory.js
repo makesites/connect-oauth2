@@ -8,7 +8,7 @@
 var CRUD = function( options ){
 
 	// use the built-in methods
-	this.store = store;
+	this.db = db;
 
 }
 
@@ -17,22 +17,22 @@ CRUD.prototype = {
 	constructor: CRUD,
 
 	create: function( data, callback ){
-		this.store.create( data, callback );
+		this.db.create( data, callback );
 	},
 
 	read: function(query, callback){
-		this.store.read( query, callback );
+		this.db.read( query, callback );
 	},
 
 	destroy: function(item, callback){
-		this.store.destroy( item, callback );
+		this.db.destroy( item, callback );
 	}
 }
 
 // Helpers
 var data = [];
 
-var store = {
+var db = {
 
 	create: function( item, callback ){
 		var key = item.access_token || item.code || false;
