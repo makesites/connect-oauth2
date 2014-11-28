@@ -8,7 +8,7 @@ var config = {
 		"refresh_token": "/refresh_token",
 		"request_token": "/request_token", // path for the request token url endpoint, default: <host>/request_token
 	}, // a list of routes used for authentication
-	api: "/api/", // api path (used in conjunction with routes flag)
+	api: "/api/", // api path, for authorizing data requests
 	host: false, // limits execution of oauth middleware to a specific host
 	authority: false, // third-party method to verify credentials
 	store: "memory", // options: memory, redis, custom model

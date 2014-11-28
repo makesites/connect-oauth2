@@ -79,9 +79,10 @@ function( data, callback ){
 
 
 * **authority** (function, default: null), a method that tests the credentials provided and returns a boolean (true/false)
-* **routes** (boolean, default: true), limits execution of the OAuth directives to specific routes
+* **routes** (object, defaults to sample routes), define auth endpoints to limit execution of the OAuth directives to specific routes
+* **api** (object, default: "/api/"), authorize api requests set with a prefix path
 * **store** (string, default: "memory"), defines the type of store used for storing the tokens. Currently supported: redis, memory
-* **db** (object, default: false), a reserved key if passing a redis db instance (used only if "store" is set other than the default) 
+* **db** (object, default: false), a reserved key if passing a redis db instance (used only if "store" is set other than the default)
 
 
 ## Credits
@@ -91,6 +92,6 @@ Initiated by Makis Tracend ( [@tracend](http://github.com/tracend) )
 Distributed through [Makesites](http://makesites.org)
 
 
-## License 
+## License
 
 Released under the [Apache license, version 2.0](http://makesites.org/licenses/APACHE-2.0)
