@@ -1,8 +1,8 @@
 // Defaults
 var config = {
 	authorize: "bearer", // the way the token is transmitted. Options: bearer, query, all
-	routes: true, // limits execution of oauth middleware to specific routes
-	auth: {
+	// setup routes to limit execution of oauth middleware to specific routes
+	routes: {
 		"authorize": "/authorize", // path for the authorize form, default: <host>/authorize' (get/post)
 		"access_token": "/access_token", // path for the access token url endpoint, default: <host>/access_token
 		"refresh_token": "/refresh_token",
