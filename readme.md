@@ -27,7 +27,7 @@ var app = connect()
 	.use(
 		oauth2({
 			authority: authority,
-			model: "memory"
+			store: "memory"
 		})
 	);
 
@@ -80,8 +80,8 @@ function( data, callback ){
 
 * **authority** (function, default: null), a method that tests the credentials provided and returns a boolean (true/false)
 * **routes** (boolean, default: true), limits execution of the OAuth directives to specific routes
-
-...
+* **store** (string, default: "memory"), defines the type of store used for storing the tokens. Currently supported: redis, memory
+* **db** (object, default: false), a reserved key if passing a redis db instance (used only if "store" is set other than the default) 
 
 
 ## Credits
@@ -89,5 +89,8 @@ function( data, callback ){
 Initiated by Makis Tracend ( [@tracend](http://github.com/tracend) )
 
 Distributed through [Makesites](http://makesites.org)
+
+
+## License 
 
 Released under the [Apache license, version 2.0](http://makesites.org/licenses/APACHE-2.0)
