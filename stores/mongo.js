@@ -1,3 +1,5 @@
+/* DO NOT USE -*/
+/* This store needs revamping */
 
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,

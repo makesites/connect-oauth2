@@ -5,16 +5,16 @@
 **/
 
 
-var Model = function( options ){
+var CRUD = function( options ){
 
 	// use the built-in methods
 	this.store = store;
 
 }
 
-Model.prototype = {
+CRUD.prototype = {
 
-	constructor: Model,
+	constructor: CRUD,
 
 	create: function( data, callback ){
 		this.store.create( data, callback );
@@ -61,4 +61,4 @@ var store = {
 }
 
 
-module.exports = Model;
+module.exports = CRUD;

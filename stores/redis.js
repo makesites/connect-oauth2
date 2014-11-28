@@ -4,16 +4,16 @@
 **/
 
 
-var Model = function( options ){
+var CRUD = function( options ){
 
 	// use the provided store (error control?)
 	this.store = options.store;
 
 }
 
-Model.prototype = {
+CRUD.prototype = {
 
-	constructor: Model,
+	constructor: CRUD,
 
 	create: function( data, callback ){
 		// fallbacks
@@ -60,4 +60,4 @@ Model.prototype = {
 }
 
 
-module.exports = Model;
+module.exports = CRUD;
