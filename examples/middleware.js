@@ -12,7 +12,7 @@ var app = connect()
 	.use(
 		oauth2({
 			authority: authority,
-			model: "memory"
+			store: "memory"
 		})
 	)
 	.use(function(req, res){
