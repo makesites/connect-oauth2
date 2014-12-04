@@ -88,7 +88,7 @@ Following the official spec, you can use the lib to authenticate in any of the f
 
 #### Application Auth
 
-Request a token fo rth application
+Request a token for the application itself, without a user context.
 
 Endpoint
 ```
