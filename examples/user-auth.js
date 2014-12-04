@@ -12,9 +12,10 @@ var userAuth = function( options ){
 
 userAuth.prototype = {
 
-	login: function(){
+	login: function( type ){
+		type = type || "code";
 		var url = this.options.api + this.routes.authorize;
-		return '<html><body><button><a href="'+ url +'?client_id='+ this.options.app.client_id +'&response_type=code&redirect_uri=http://localhost:3000/auth/code">Click to login</a></button></body></html>'
+		return '<html><body><button><a href="'+ url +'?client_id='+ this.options.app.client_id +'&response_type='+ type +'&redirect_uri=http://localhost:3000/auth/'+ type +'">Click to login</a></button></body></html>'
 	},
 
 	token: function( code ){
