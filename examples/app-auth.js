@@ -1,4 +1,4 @@
-// this is the basic use of the lib, included as a middleware of the "app"
+// application only authentication, executed on the server-side
 
 var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
 	request = require('request'),
