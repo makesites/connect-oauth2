@@ -163,7 +163,7 @@ No refresh token is included with this type of authentication.
 
 #### User Auth - Password
 
-In this method the user shares their username/password with the application. Please be advized that in some cases this practice could be a security risk.
+In this method the user shares their username/password with the application. Please be advised that in some cases this practice could be a security risk.
 
 Endpoint
 ```
@@ -171,6 +171,7 @@ Endpoint
 ```
 
 Parameters
+```
 grant_type=password
 username
 password
