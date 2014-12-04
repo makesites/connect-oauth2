@@ -1,21 +1,40 @@
 // in this example we see the oauth lib initiated independently (not as a middleware) and executed on demand
 
-var oauth2 = require("../index"), // use instead: require("connect-oauth2")
+var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
 	connect = require('connect'),
 	querystring = require('querystring'),
-	http = require('http');
+	http = require('http'),
+	UserAuth = require('./user-auth');
 
-var token = null;
+var token = null,
+	options = {
+		api: "http://localhost:3000",
+		app: {
+			client_id : 'test123',
+			client_secret : 'mypassword'
+		},
+		// custom routes
+		routes: {
+			authorize: "/authorize",
+			access_token: "/access_token",
+			refresh_token: "/refresh_token",
+			request_token: "/request_token"
+		}
+	};
+
+// init OAuth provider
+var oauth = OAuth2({
+	authority: authority,
+	routes: options.routes,
+	middleware: false,
+	store: "memory"
+});
+
+// helper
+var my = new UserAuth( options );
 
 // APP
 var app = connect()
-	.use(
-		oauth2({
-			authority: authority,
-			store: "memory",
-			middleware: false
-		})
-	)
 	.use(function(req, res, next){
 		// simple router
 		var path = req._parsedUrl.pathname;
@@ -28,14 +47,14 @@ var app = connect()
 					res.end("You are now logged in! Token: "+ token);
 				} else {
 					// display login button
-					res.end("<html><body><button><a href='http://localhost:3000/authorize?client_id=test123&response_type=code&redirect_uri=http://localhost:3000/auth/code'>Click to login</a></button></body></html>");
+					res.end( my.login() );
 				}
 			break;
 			case "/auth/code":
 				var params = querystring.parse( req._parsedUrl.query );
 				console.log( "params", params );
 				// exchange the code for and access code
-				var url = "http://localhost:3000/access_token?code="+ params.code +"&client_id=test123&client_secret=mypassword&redirect_uri=http://localhost:3000/auth/token";
+				var url = my.token( params.code );
 				res.writeHead(307, {'Location': url });
 				res.end();
 			break;
@@ -51,7 +70,15 @@ var app = connect()
 
 			// OAuth methods
 			case "/authorize":
-				oauth.getCode(req, res, next);
+				oauth.userAuth(req, res, function(){
+					// present the dialog
+					console.log("check session...");
+					// use template engine for this...
+					var form = my.dialog( req );
+					res.end( form );
+					next();
+				});
+
 			break;
 			case "/access_token":
 				oauth.accessToken(req, res, next);
@@ -73,18 +100,12 @@ function authority( data, callback ){
 	console.log( "authorize data", data );
 
 	for(var key in data){
-		// key can be: client_id, client_secret, username, password
+		// key can be: client_id, client_secret, username, password, uid
 		// validate data here...
 	}
 	return callback(true);
 
 }
 
-
-var oauth = oauth2({
-	authority: authority,
-	middleware: false,
-	model: "memory"
-});
 
 http.createServer(app).listen(3000);
