@@ -65,7 +65,7 @@ An example of the basic scaffolding follows:
 function( data, callback ){
 
 	for(var key in data){
-		// key can be: client_id, client_secret, username, password
+		// key can be: client_id, client_secret, username, password, user_id
 		// validate data here...
 		// if not correct:
 		return callback(false);
