@@ -29,9 +29,9 @@ userAuth.prototype = {
 
 		var form = '<p>Usually here we check the session and ask the user to login if needed. But for simplicity just accept or deny the request below:</p>';
 
-		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="client_id" value="'+ req.query.client_id +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="redirect_uri" value="'+ req.query.redirect_uri +'"><input type="hidden" name="response_type" value="'+ req.query.response_type +'"><input type="hidden" name="grant" value="1"><input type="submit" value="Accept"></form>';
+		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="oauth_params" value="'+ req.oauth.params +'"><input type="hidden" name="grant" value="1"><input type="submit" value="Accept"></form>';
 
-		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="client_id" value="'+ req.query.client_id +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="redirect_uri" value="'+ req.query.redirect_uri +'"><input type="hidden" name="response_type" value="'+ req.query.response_type +'"><input type="hidden" name="grant" value="0"><input type="submit" value="Deny"></form>'
+		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="oauth_params" value="'+ req.oauth.params +'"><input type="hidden" name="grant" value="0"><input type="submit" value="Deny"></form>'
 
 		return form;
 	}
