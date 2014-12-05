@@ -55,8 +55,19 @@ CRUD.prototype = {
 			if(err) return callback(err);
 			callback( null, true );
 		});
+	},
+	// FIX THIS: query not implemented for redis yet...
+	query: function( query, callback ){
+		var key = query.access_token || query.code || false;
+		if( !key ) return callback(null, false);
+		// connect to db
+		this.db.get( key, function(err, data){
+			if(err) return callback(err);
+			// parse data into an object
+			data = JSON.parse( data.toString() );
+			callback( null, data );
+		});
 	}
-
 }
 
 

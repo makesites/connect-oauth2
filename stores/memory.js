@@ -56,6 +56,25 @@ var db = {
 		delete data[key];
 		// assume only one item for every key
 		return callback(null, true);
+	},
+
+	query: function( query, callback ){
+		// loop through the stored data
+		for( var i in data ){
+			// try to match supplied data
+			var valid = false;
+			for(var j in query){
+				// stop the lop if we found one inconsistency
+				if( data[i][j] != query[j] ){
+					valid = false;
+					break;
+				}
+				valid = true;
+			}
+			// if all conditions are met...
+			if( valid ) return callback(null, data[i]);
+		}
+		return callback(null, false);
 	}
 
 }
