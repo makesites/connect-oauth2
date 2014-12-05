@@ -6,6 +6,7 @@ var config = {
 		"authorize": "/oauth/authorize", // path for the authorize form, default: <host>/oauth/authorize' (get/post)
 		"token": "/oauth/token", // path for the access token url endpoint, default: <host>/oauth/token
 	}, // a list of routes used for authentication
+	secret: (new Date()).getTime(), // the secret used for encoding/decoding strings
 	api: "/api/", // api path, for authorizing data requests
 	host: false, // limits execution of oauth middleware to a specific host
 	authority: false, // third-party method to verify credentials
