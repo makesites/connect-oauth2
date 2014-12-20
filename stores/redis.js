@@ -48,7 +48,7 @@ CRUD.prototype = {
 	},
 
 	destroy: function( item, callback ){
-		var key = query.access_token || query.code || false;
+		var key = item.access_token || item.code || false;
 		if( !key ) return callback(null, false);
 		// connect to db
 		this.db.del( key, function(err, data){
