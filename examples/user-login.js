@@ -6,6 +6,7 @@ var oauth2 = require("../index"), // use instead: require("connect-oauth2")
 	http = require('http');
 
 var token = null;
+var api = "http://localhost";
 
 // APP
 var app = connect()
@@ -36,7 +37,7 @@ var app = connect()
 				// send request
 				var username = params.username;
 				var password = params.password;
-				var url = "http://localhost:3000/oauth/token?grant_type=password&username="+ username +"&password="+ password +"&client_id=test123&client_secret=mypassword&redirect_uri=http://localhost:3000/auth/token";
+				var url = api +"/oauth/token?grant_type=password&username="+ username +"&password="+ password +"&client_id=test123&client_secret=mypassword&redirect_uri=http://localhost:3000/auth/token";
 				res.writeHead(307, {'Location': url });
 				res.end();
 			break;
@@ -52,9 +53,6 @@ var app = connect()
 		}
 	});
 
-http.createServer(app).listen(3000);
-
-
 
 // Helper
 
@@ -69,3 +67,6 @@ function authority( data, callback ){
 	return callback(true);
 
 }
+
+
+http.createServer(app).listen(8080);

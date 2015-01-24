@@ -4,18 +4,18 @@ var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
 	connect = require('connect'),
 	querystring = require('querystring'),
 	http = require('http'),
-	UserAuth = require('./user-auth');
+	Auth = require('./auth');
 
 var token = null,
 	options = {
-		api: "http://localhost:3000",
+		api: "http://localhost",
 		app: {
 			client_id : 'test123',
 			client_secret : 'mypassword'
 		}
 	};
 // helper
-var my = new UserAuth( options );
+var my = new Auth( options );
 
 // APP
 var app = connect()
@@ -74,9 +74,6 @@ var app = connect()
 		}
 	});
 
-http.createServer(app).listen(3000);
-
-
 
 // Helper
 
@@ -91,3 +88,6 @@ function authority( data, callback ){
 	return callback(true);
 
 }
+
+
+http.createServer(app).listen(8080);

@@ -6,7 +6,7 @@ var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
 	http = require('http');
 
 var token = null;
-
+var api = "http://localhost";
 
 // APP
 var app = connect()
@@ -28,7 +28,7 @@ var app = connect()
 					res.end("Application Token: "+ token);
 				} else {
 					// request token
-					request.get("http://localhost:3000/oauth/token?client_id=test123&client_secret=mypassword&grant_type=client_credentials",
+					request.get( api +"/oauth/token?client_id=test123&client_secret=mypassword&grant_type=client_credentials",
 					function( error, response, result ){
 						var data = JSON.parse( result );
 						console.log("data", data);
@@ -46,7 +46,7 @@ var app = connect()
 		}
 	});
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(8080);
 
 
 

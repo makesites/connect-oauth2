@@ -6,7 +6,7 @@ var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
 	http = require('http');
 
 var token = null;
-
+var api = "http://localhost";
 
 // APP
 var app = connect()
@@ -33,13 +33,13 @@ var app = connect()
 					res.end(body);
 				} else {
 					// request token
-					request.get("http://localhost:3000/oauth/token?client_id=test123&client_secret=mypassword&grant_type=client_credentials",
+					request.get( api +"/oauth/token?client_id=test123&client_secret=mypassword&grant_type=client_credentials",
 					function( error, response, result ){
 						var data = JSON.parse( result );
 						console.log("data", data);
 						token = data.access_token;
 						// redirect to "register" token
-						res.writeHead(301, {'Location': "http://localhost:3000/" });
+						res.writeHead(301, {'Location': "http://localhost:8080/" });
 						res.end();
 					});
 				}
@@ -47,7 +47,7 @@ var app = connect()
 			case "/valid":
 				// attach the token to the request headers
 				request.get({
-					url: "http://localhost:3000/api/data",
+					url: api +"/api/data",
 					headers: {
 						'Authorization': 'Bearer '+ token
 					}
@@ -59,7 +59,7 @@ var app = connect()
 			break;
 			case "/invalid":
 				// just request the data
-				request.get("http://localhost:3000/api/data",
+				request.get(api +"/api/data",
 				function( error, response, result ){
 					console.log("result", result);
 					res.end(result);
@@ -76,9 +76,6 @@ var app = connect()
 		}
 	});
 
-http.createServer(app).listen(3000);
-
-
 
 // Helper
 
@@ -93,3 +90,7 @@ function authority( data, callback ){
 	return callback(true);
 
 }
+
+
+
+http.createServer(app).listen(8080);

@@ -1,41 +1,78 @@
-// helper file for user authentication
+// similar to user-auth using middleware, only now the credentials are passed on the client-side (using a hash)
 
-var userAuth = function( options ){
-	this.options = options;
+var OAuth2 = require("../index"), // use instead: require("connect-oauth2")
+	connect = require('connect'),
+	querystring = require('querystring'),
+	http = require('http'),
+	Auth = require('./auth');
 
-	this.routes = options.routes || {
-		authorize: "/oauth/authorize",
-		token: "/oauth/token"
+var token = null,
+	options = {
+		api: "http://localhost",
+		app: {
+			client_id : 'test123',
+			client_secret : 'mypassword'
+		}
 	};
-}
+// helper
+var my = new Auth( options );
+
+// APP
+var app = connect()
+	.use(
+		OAuth2({
+			authority: authority,
+			store: "memory"
+		})
+	)
+	.use(function(req, res){
+		// simple router
+		var path = req._parsedUrl.pathname;
+
+		switch( path ){
+			// CLIENT
+			case "/":
+				// check login state
+				if( token ){
+					res.end("You are now logged in! Token: "+ token);
+				} else {
+					// display login button
+					res.end( my.login("token") );
+				}
+			break;
+			case "/auth/token":
+				// credentials passed to the client using a hash
+				res.end("<script>alert( window.location.hash )</script>");
+			break;
+			// REMOTE
+			case "/oauth/authorize":
+				// present the dialog
+				console.log("check session...");
+				// use template engine for this...
+				var form = my.dialog( req );
+
+				res.end( form );
+			break;
+
+		// pass through and let the application deal with this
+
+		}
+	});
+
+http.createServer(app).listen(3000);
 
 
-userAuth.prototype = {
 
-	login: function( type ){
-		type = type || "code";
-		var url = this.options.api + this.routes.authorize;
-		return '<html><body><button><a href="'+ url +'?client_id='+ this.options.app.client_id +'&response_type='+ type +'&redirect_uri=http://localhost:3000/auth/'+ type +'">Click to login</a></button></body></html>'
-	},
+// Helper
 
-	token: function( code ){
-		var url = this.options.api + ( this.routes.token || this.routes.access_token );
-		return url +'?grant_type=authorization_code&code='+ code +'&client_id='+ this.options.app.client_id +'&client_secret='+ this.options.app.client_secret +'&redirect_uri=http://localhost:3000/auth/token';
-	},
+function authority( data, callback ){
 
-	dialog: function( req ){
+	console.log( "authorize data", data );
 
-		var user_id = "myid"; // this comes from the session...
-
-		var form = '<p>Usually here we check the session and ask the user to login if needed. But for simplicity just accept or deny the request below:</p>';
-
-		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="oauth_params" value="'+ req.oauth.params +'"><input type="hidden" name="grant" value="1"><input type="submit" value="Accept"></form>';
-
-		form += '<form action="'+ this.routes.authorize +'"><input type="hidden" name="user_id" value="'+ user_id +'"><input type="hidden" name="oauth_params" value="'+ req.oauth.params +'"><input type="hidden" name="grant" value="0"><input type="submit" value="Deny"></form>'
-
-		return form;
+	for(var key in data){
+		// key can be: client_id, client_secret, username, password
+		// validate data here...
 	}
+	return callback(true);
 
 }
-
-module.exports = userAuth;
