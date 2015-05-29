@@ -1,6 +1,6 @@
 {
 	"name": "connect-oauth2",
-	"version": "0.7.1",
+	"version": "0.7.2",
 	"description": "Node.js OAuth2 provider as a connect middleware",
 	"author": "makesites",
 	"contributors": [
