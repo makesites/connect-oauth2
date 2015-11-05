@@ -40,7 +40,8 @@ CRUD.prototype = {
 		if( !key ) return callback(null, false);
 		// connect to db
 		this.db.get( key, function(err, data){
-			if(err) return callback(err);
+			if( err ) return callback(err);
+			if( !data ) return callback(null, false);
 			// parse data into an object
 			data = JSON.parse( data.toString() );
 			callback( null, data );
