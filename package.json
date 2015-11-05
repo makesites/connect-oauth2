@@ -15,6 +15,7 @@
 	"bugs": {
 		"url": "https://github.com/makesites/connect-oauth2/issues"
 	},
+	"license": "Apache-2.0",
 	"licenses": [
 		{
 			"type": "Apache license, version 2.0",
