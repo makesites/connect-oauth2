@@ -45,7 +45,6 @@ var db = {
 	read: function( query, callback ){
 		var key = query.access_token || query.code || false;
 		if( !key ) return callback(null, false);
-		var value = query[key];
 		if( data[key] ) return callback(null, data[key]);
 		return callback(null, false);
 	},
